@@ -1,5 +1,3 @@
-import com.codeborne.selenide.logevents.SelenideLogger;
-import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.Test;
 import pages.SelenidePage;
 import pages.WebStepsPage;
@@ -10,12 +8,11 @@ import static io.qameta.allure.Allure.step;
 
 public class StepsTest extends TestBase {
 
+    SelenidePage selenidePage = new SelenidePage();
+    WebStepsPage webStepsPage = new WebStepsPage();
+
     @Test
     public void testLambdaStep() {
-        SelenidePage selenidePage = new SelenidePage();
-
-        SelenideLogger.addListener("allure", new AllureSelenide());
-
         step("Открываем главную страницу", () -> {
             selenidePage.openPage();
         });
@@ -36,10 +33,6 @@ public class StepsTest extends TestBase {
 
     @Test
     public void testAnnotatedStep() {
-        WebStepsPage webStepsPage = new WebStepsPage();
-
-        SelenideLogger.addListener("allure", new AllureSelenide());
-
         webStepsPage.openPage();
         webStepsPage.openSearchInput();
         webStepsPage.textSearchInput(REPOSITORY);
